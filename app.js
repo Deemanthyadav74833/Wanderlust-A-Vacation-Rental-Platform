@@ -76,17 +76,13 @@ passport.deserializeUser(User.deserializeUser());
 app.use((req,res,next)=>{
     res.locals.success= req.flash("success");
     res.locals.error= req.flash("error");
-    res.locals.currUser = req.user;
+    res.locals.currUser = req.user||null;
     next();
 })
 
-app.get("/demo",async(req,res)=>{
-    let fakeUser = new User({
-        email:"deemanthyadav123@gmail.com",
-        username:"deemanthyadav123",
-    }) ;
-    let registerdUser = await User.register(fakeUser,"hello world");
-    res.send(registerdUser);
+app.get("https://wanderlustproject-68d8.onrender.com/",async(req,res)=>{
+    const allListings = await Listing.find();
+    res.render("./listings/index",{allListings});
 });
 
 app.use("/listings",listingsRouter);

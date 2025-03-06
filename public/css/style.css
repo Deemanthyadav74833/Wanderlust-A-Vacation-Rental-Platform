@@ -66,6 +66,8 @@ body{
     width: 100% !important;
     border-radius: 1rem !important;
     object-fit: cover !important;
+    height: auto;
+    max-height: 600px;
 }
 
 .card-body{
