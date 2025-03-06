@@ -114,7 +114,33 @@ body{
     padding-right: 0;
 }
 
+#map-container {
+    width: 100%; 
+    max-width: 860px; /* Restrict width like the image */
+}
+
 #map {
-    width: 80vh;
-    height: 400px;
- }
+    width: 100%;
+    height: 400px; /* Set a proper default height */
+    min-height: 200px; /* Ensures it doesn't shrink too much */
+    max-height: 500px; /* Prevents it from becoming too large */
+    border-radius: 5px; /* Matches Bootstrap card styles */
+}
+
+.btns {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 10px; /* Space between buttons */
+}
+
+.btn {
+    min-width: 100px; /* Ensures they don't shrink too much */
+    text-align: center;
+    padding: 10px 20px; /* Ensures consistent padding */
+}
+
+
+
+
+

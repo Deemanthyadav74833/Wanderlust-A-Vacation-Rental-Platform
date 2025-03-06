@@ -79,12 +79,6 @@ app.use((req,res,next)=>{
     res.locals.currUser = req.user||null;
     next();
 })
-
-app.get("https://wanderlustproject-68d8.onrender.com/",async(req,res)=>{
-    const allListings = await Listing.find();
-    res.render("./listings/index",{allListings});
-});
-
 app.use("/listings",listingsRouter);
 app.use("/listings/:id/reviews",reviewsRouter);
 app.use("/",userRouter);
