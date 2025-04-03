@@ -1,53 +1,267 @@
 <style>
-  .btn-search {
-    /* width: 300px; */
-    background-color: #fe424d;
-    color: white;
-    border-radius: 25px;
-    padding: 0 2rem 0 0.2rem;
-  }
-  .btn-search:hover {
-    background-color: #fe424d;
-    color: white;
-  }
-  .btn-search i {
-    display: inline;
-    margin: 0.5rem;
-  }
+    /* Navbar Styles */
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 20px;
+        background: white;
+        border-bottom: 1px solid #ccc;
+    }
 
-.search-inp{
-  padding: 0.5rem;
-  border-radius: 25px;
-}
+    .navbar-brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .navbar-brand i {
+        font-size: 24px;
+    }
+
+    .search-container {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        margin: 0 20px;
+    }
+
+    .search-bar {
+        display: flex;
+        align-items: center;
+        background: white;
+        border-radius: 50px;
+        padding: 10px;
+        box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 1200px;
+    }
+
+    .search-option {
+        display: flex;
+        flex-direction: column;
+        padding: 10px;
+        width: 100%;
+    }
+
+    .search-option input {
+        border: none;
+        outline: none;
+        font-size: 14px;
+        width: 100%;
+        padding: 5px;
+    }
+
+    .divider {
+        height: 30px;
+        width: 1px;
+        background: #ccc;
+        margin: 0 10px;
+    }
+    .search-btn {
+        background: #fe424d;
+        border: none;
+        border-radius: 50%;
+        width: 35px; /* Smaller width for small screens */
+        height: 35px; /* Smaller height for small screens */
+        min-width: 35px; /* Ensure it doesn't shrink further */
+        min-height: 35px; /* Ensure it doesn't shrink further */
+        color: white;
+        font-size: 16px; /* Smaller icon size */
+        cursor: pointer;
+        margin-left: 10px; /* Add some spacing between input and button */
+        display: flex;
+        align-items: center;
+        justify-content: center; /* Center the icon */
+        box-sizing: border-box; /* Ensure padding and border are included */
+        }
+
+    .simple-search {
+        display: none; /* Hidden by default */
+        align-items: center;
+        background: white;
+        border-radius: 50px;
+        padding: 8px 16px;
+        box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+        width: 80%;
+        margin: auto;
+    }
+
+    .simple-input {
+        border: none;
+        outline: none;
+        font-size: 14px;
+        width: 100%;
+        padding: 5px;
+    }
+
+    .navbar-nav {
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        gap: 20px;
+    }
+
+    .profile-menu {
+        position: relative;
+    }
+
+    .menu-btn {
+        background: none;
+        border: 1px solid #ccc;
+        border-radius: 50px;
+        padding: 8px 12px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        cursor: pointer;
+    }
+
+    .menu-btn i {
+        font-size: 16px;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background: white;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+        overflow: hidden;
+        min-width: 150px;
+        right: 0;
+        top: 50px; /* Position below the profile button */
+        z-index: 1000; /* Ensure it appears above other elements */
+    }
+
+    .dropdown-content a {
+        padding: 10px;
+    }
+
+    .dropdown-content a:hover {
+        background: #f1f1f1;
+    }
+
+    .profile-menu.active .dropdown-content {
+        display: block;
+    }
+
+    /* Responsive behavior */
+    @media (max-width: 768px) {
+        .search-bar {
+            display: none; /* Hide the full search bar */
+        }
+
+        .simple-search {
+            display: flex; /* Show the simple search bar */
+        }
+
+        /* Adjust dropdown positioning for small screens */
+        .dropdown-content {
+            top: 40px; /* Move dropdown closer to the button */
+            right: 0;
+            left: auto; /* Ensure it aligns to the right */
+        }
+    }
+
+    @media (max-width: 480px) {
+        .simple-search {
+            width: 100%; /* Full width on very small screens */
+            padding: 6px 12px; /* Adjust padding */
+        }
+
+        .simple-input {
+            font-size: 12px; /* Smaller font size */
+        }
+
+        .search-btn {
+            width: 35px; /* Smaller button size */
+            height: 35px;
+            font-size: 14px; /* Smaller icon size */
+        }
+
+        /* Further adjust dropdown for very small screens */
+        .dropdown-content {
+            top: 35px; /* Move dropdown closer to the button */
+            min-width: 120px; /* Reduce width for very small screens */
+        }
+    }
 </style>
 
-
-<nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="/listings"><i class="fa-regular fa-compass"></i></a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-          <a class="nav-link" href="/listings">Explore</a>
-        </div>
-        <div class="navbar-nav ms-auto">
-          <form class="d-flex" role="search">
-            <input class="form-control me-2 search-inp" type="search" placeholder="          Search destinations">
-            <button class="btn btn-search" type="submit"><i class="fa-solid fa-magnifying-glass "></i>Search</button>
-          </form>
-        </div>
-        <div class="navbar-nav ms-auto">
-          <a class="nav-link" href="/listings/new">Airbnb your home</a>
-          <% if(!currUser){ %>
-            <a class="nav-link" href="/signup"><b>Sign up</b></a>
-            <a class="nav-link" href="/login"><b>Login</b></a>
-          <% } %>
-          <% if(currUser){ %>
-            <a class="nav-link" href="/logout"><b>Logout</b></a>
-          <% } %>
-        </div>
-      </div>
+<nav class="navbar">
+    <!-- Left Section: Icon and Explore -->
+    <div class="navbar-brand">
+        <a href="/listings"><i class="fa-regular fa-compass"></i></a>
+        <a class="nav-link" href="/listings">Explore</a>
     </div>
-  </nav>
+
+    <!-- Middle Section: Search Bar -->
+    <div class="search-container">
+        <!-- Full Search Bar (Visible on Large and Medium Screens) -->
+        <div class="search-bar">
+            <div class="search-option">
+                <span class="label">Where</span>
+                <input type="text" placeholder="Search destinations">
+            </div>
+            <div class="divider"></div>
+            <div class="search-option">
+                <span class="label">Check in</span>
+                <input type="date">
+            </div>
+            <div class="divider"></div>
+            <div class="search-option">
+                <span class="label">Check out</span>
+                <input type="date">
+            </div>
+            <div class="divider"></div>
+            <div class="search-option">
+                <span class="label">Who</span>
+                <input type="text" placeholder="Add guests">
+            </div>
+            <button class="search-btn">
+                <i class="fa fa-search"></i>
+            </button>
+        </div>
+
+        <!-- Simple Search Bar (Visible on Small Screens) -->
+        <div class="simple-search">
+            <input type="text" class="simple-input" placeholder="Search...">
+            <button class="search-btn">
+                <i class="fa fa-search"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Right Section: Airbnb your home and Profile Menu -->
+    <div class="navbar-nav">
+        <a class="nav-link" href="/listings/new">Airbnb your home</a>
+        <div class="profile-menu">
+            <button class="menu-btn">
+                <i class="fa-solid fa-bars"></i>
+                <i class="fa-solid fa-user"></i>
+            </button>
+            <div class="dropdown-content">
+                <% if (!currUser) { %>
+                    <a class="nav-link" href="/signup"><b>Sign up</b></a>
+                    <a class="nav-link" href="/login"><b>Login</b></a>
+                <% } %>
+                <% if (currUser) { %>
+                    <a class="nav-link" href="/logout"><b>Logout</b></a>
+                <% } %>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<script>
+    document.querySelector(".menu-btn").addEventListener("click", function () {
+        document.querySelector(".profile-menu").classList.toggle("active");
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener("click", function (e) {
+        if (!e.target.closest(".profile-menu")) {
+            document.querySelector(".profile-menu").classList.remove("active");
+        }
+    });
+</script>
