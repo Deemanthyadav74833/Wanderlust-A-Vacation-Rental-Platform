@@ -94,7 +94,7 @@ app.all("*",(req,res,next)=>{
 app.use((err,req,res,next)=>{
     let{status=500,message="something went wrong" } = err;
     res.status(status).render("error.ejs",{message});
-})
+});
 
 //listen route
 app.listen(8080,()=>{
